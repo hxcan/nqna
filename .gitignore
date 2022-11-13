@@ -1,0 +1,7 @@
+.gradle/
+.idea/
+NQNAAndroid.iml
+local.properties
+nqna/build/
+nqna/nqna.iml
+
