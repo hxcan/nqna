@@ -1,5 +1,10 @@
 package com.stupidbeauty.nqna;
 
+import com.stupidbeauty.shutdownat2100.helper.ShutDownAt2100Manager;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.protobuf.InvalidProtocolBufferException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +27,6 @@ import com.stupidbeauty.upgrademanager.UpgradeManager;
  * @author Hxcan
  *
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class MacroOperations
 {
 	private final Context context; //!<The context.
@@ -92,6 +96,18 @@ public class MacroOperations
 		UpgradeManager upgradeManager=new UpgradeManager(context); // Create upgrade manager.
       
 		upgradeManager.checkUpgrade(); // Check upgrade.
+	} //private void requestInstallApk(String textContent, String transactionId)
+
+	/**
+	 * Start friend shutdownat2100.
+	 */
+	public void startFriendShutDownAt2100()
+	{
+//     Chen xin
+    
+    ShutDownAt2100Manager shutDownAt2100Manager= null; // 管理与21点关机之间的事务。
+    shutDownAt2100Manager=new ShutDownAt2100Manager(context);
+    shutDownAt2100Manager.checkShutDownTime(); // Check shut down time.
 	} //private void requestInstallApk(String textContent, String transactionId)
 
 	/**
