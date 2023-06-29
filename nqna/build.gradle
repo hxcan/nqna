@@ -1,106 +1,33 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
 
-version="2020.4.12"
+android 
+{
+  compileSdkVersion 28
 
+  defaultConfig 
+  {
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 752
+    versionName version
+    multiDexEnabled true
+  }
 
-android {
-    compileSdkVersion 28
-
-    resourcePrefix "stupidbeauty__"
-
-    defaultConfig 
+  buildTypes 
+  {
+    release 
     {
-      minSdkVersion 14
-      targetSdkVersion 28
-      versionCode 752
-      versionName version
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
-
-    buildTypes 
-    {
-      release 
-      {
-        minifyEnabled false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-      }
-    }
+  }
 }
 
 dependencies
 {
-//   implementation 'com.github.hxcan:upgrademanager:2022.11.5'
-//   compile 'com.github.hxcan:upgrademanager:2022.11.5'
-  compile 'com.github.hxcan:upgrademanager:2023.1.15'
-  compile 'com.github.hxcan:ShutDownAt2100Helper:2023.1.9'
+  implementation 'com.github.hxcan:upgrademanager:2023.1.15'
+  implementation 'com.github.hxcan:ShutDownAt2100Helper:2023.6.21'
+  implementation 'com.github.hxcan:feedback:2023.6.35'
+  implementation 'androidx.multidex:multidex:2.0.1'
 }
 
-install 
-{
-  repositories.mavenInstaller 
-  {
-    pom 
-    {
-      project 
-      {
-        licenses 
-        {
-          license 
-          {
-            //noinspection GroovyAssignabilityCheck
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-
-        developers 
-        {
-          developer 
-          {
-            id 'hxcan'
-            //noinspection GroovyAssignabilityCheck
-            name 'Hxcan Cai'
-            email 'caihuosheng@gmail.com'
-          }
-        }
-      }
-    }
-  }
-}
-
-task sourcesJar(type: Jar) {
-    //noinspection GroovyAssignabilityCheck
-    from android.sourceSets.main.java.srcDirs
-    classifier='sources'
-}
-
-task javadoc(type: Javadoc) {
-    source=android.sourceSets.main.java.srcDirs
-    //noinspection GroovyAssignabilityCheck
-    classpath+=project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier='javadoc'
-    //noinspection GroovyAssignabilityCheck
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-Properties properties=new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray 
-{
-  user=properties.getProperty("bintray.user")
-  key=properties.getProperty("bintray.apikey")
-  configurations=['archives']
-  pkg 
-  {
-    repo="maven"
-  }
-}

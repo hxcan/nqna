@@ -1,10 +1,15 @@
 package com.stupidbeauty.nqna;
 
+import com.stupidbeauty.feedback.Feedback;
+// import androidx.documentfile.provider.DocumentFile;
+import java.io.File;
+// import com.koushikdutta.async.callback.CompletedCallback;
+// import com.koushikdutta.async.callback.ListenCallback;
 import com.stupidbeauty.shutdownat2100.helper.ShutDownAt2100Manager;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.google.protobuf.InvalidProtocolBufferException;
+// import com.android.volley.RequestQueue;
+// import com.android.volley.Response;
+// import com.android.volley.VolleyError;
+// import com.google.protobuf.InvalidProtocolBufferException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -96,6 +101,16 @@ public class MacroOperations
 		UpgradeManager upgradeManager=new UpgradeManager(context); // Create upgrade manager.
       
 		upgradeManager.checkUpgrade(); // Check upgrade.
+	} //private void requestInstallApk(String textContent, String transactionId)
+
+	/**
+	 * Show feedback ui
+	 */
+	public void showFeedbackUi()
+	{
+    Feedback feedback = new Feedback(context, "caihuosheng@gmail.com");
+    
+    feedback.showFeedbackUi(); // Show feedback ui.
 	} //private void requestInstallApk(String textContent, String transactionId)
 
 	/**
